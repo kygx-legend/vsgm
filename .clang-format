@@ -1,0 +1,9 @@
+---
+BasedOnStyle: Chromium
+AlignAfterOpenBracket: AlwaysBreak
+AllowAllParametersOfDeclarationOnNextLine: true
+SpacesBeforeTrailingComments: '2'
+Standard: Cpp11
+TabWidth: '2'
+UseTab: Never
+ColumnLimit: 200

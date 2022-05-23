@@ -1,0 +1,6 @@
+[submodule "lib/moderngpu"]
+	path = lib/moderngpu
+	url = https://github.com/kygx-legend/moderngpu.git
+[submodule "lib/MPMCQueue"]
+	path = lib/MPMCQueue
+	url = https://github.com/rigtorp/MPMCQueue.git

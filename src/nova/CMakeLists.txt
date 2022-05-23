@@ -1,0 +1,48 @@
+cmake_minimum_required(VERSION 3.5)
+project(sm-gpu-kmeans)
+
+if (POLICY CMP0074)
+  cmake_policy(SET CMP0074 NEW)
+endif ()
+
+if (APPLE)
+  set(BasicLibs pthread)
+else ()
+  set(BasicLibs pthread rt)
+endif ()
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ftrack-macro-expansion=0 -fno-diagnostics-show-caret")
+endif ()
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse2 -msse4.1 -msse3 -mavx -mavx2")
+if (NOT DEFINED ENABLE_ADDRESS_SANITIZER AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  set(ENABLE_ADDRESS_SANITIZER ON)
+endif ()
+message("-- ENABLE_ADDRESS_SANITIZER: " ${ENABLE_ADDRESS_SANITIZER})
+if (${ENABLE_ADDRESS_SANITIZER})
+  # enabled by default
+  set(CMAKE_CXX_FLAGS_DEBUG "-g -fsanitize=address")
+endif ()
+
+if (DEFINED ENV{NOVA_ROOT})
+  set(NOVA_ROOT_DIR $ENV{NOVA_ROOT})
+endif ()
+find_package(NOVA REQUIRED)
+include_directories(${NOVA_INCLUDE_DIR} ${NOVA_DEPS_HEADERS})
+set(ExtLibs ${ExtLibs} ${NOVA_LIBRARY} ${NOVA_DEPS_LIBS})
+if (${NOVA_USE_PHMAP})
+  add_definitions(-DENABLE_PHMAP=1)
+endif ()
+message("-- ENABLE_PHMAP: " ${NOVA_USE_PHMAP})
+
+include_directories(.)
+include_directories(..)
+
+macro(add symbol file)
+  add_executable(${symbol} ${file})
+  target_link_libraries(${symbol} ${ExtLibs} ${BasicLibs})
+endmacro()
+
+add(RecursiveKMeans recursive_kmeans.cpp)
