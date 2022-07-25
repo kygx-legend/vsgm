@@ -26,7 +26,8 @@ const static size_t MAX_THREADS_NUM = MAX_BLOCKS_NUM * THREADS_PER_BLOCK;
 
 const static unsigned int FULL_WARP_MASK = 0xffffffff;
 
-const static double kDeviceMemoryUnit = 10.6;  // 2080ti
+const static double kDeviceMemoryUnit = 7.5;  // 2080
+//const static double kDeviceMemoryUnit = 10.6;  // 2080ti
 // const static double kDeviceMemoryUnit = 15.5;  // v100
 // const static double kDeviceMemoryUnit = 14.5;  // t4
 // const static double kDeviceMemoryUnit = 10.357;  // alignment
