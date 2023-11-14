@@ -40,14 +40,14 @@ fi
 # kmeans
 if [[ -f "${DATA_DIR}/com-friendster.ungraph.txt.bin.1hop.bin" ]]; then
   echo "[Run] run kmeans on friendster graph"
-  ${VSGM_KMEANS} -f ${DATA_DIR}/com-friendster.ungraph.txt.bin -i 10 -t 32 -k 4 -init 0 -rc 1
+  ${VSGM_KMEANS} -f ${DATA_DIR}/com-friendster.ungraph.txt.bin.1hop.bin -i 10 -t 32 -k 4 -init 0 -rc 1
   echo "[Done] run kmeans on friendster graph"
 fi
 
 # view bin packing
 if [[ -f "${DATA_DIR}/com-friendster.ungraph.txt.bin.kmeans.4" ]]; then
   echo "[Run] run view bin packing on friendster graph"
-  cp ${DATA_DIR}/com-friendster.ungraph.txt.bin.kmeans.4 ${DATA_DIR}/com-friendster.ungraph.txt.bin.kmeans.1x4
+  cp ${DATA_DIR}/com-friendster.ungraph.txt.bin.1hop.bin.kmeans.4 ${DATA_DIR}/com-friendster.ungraph.txt.bin.kmeans.1x4
   ${VSGM_BIN_PACKING} -gf ${DATA_DIR}/com-friendster.ungraph.txt.bin -pf ${DATA_DIR}/com-friendster.ungraph.txt.bin.kmeans.1x4 -h 2 -m 10 -t 1 -s 1 -d 1
   echo "[Done] run view bin packing on friendster graph"
 fi

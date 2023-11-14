@@ -40,7 +40,7 @@ View Bin Packing
 -------------
 
     $ cd test
-    $ cp com-friendster.ungraph.txt.bin.kmeans.4 com-friendster.ungraph.txt.bin.kmeans.1x4
+    $ cp com-friendster.ungraph.txt.bin.1hop.bin.kmeans.4 com-friendster.ungraph.txt.bin.kmeans.1x4
     $ ../src/tools/view_packing -gf com-friendster.ungraph.txt.bin -pf com-friendster.ungraph.txt.bin.kmeans.1x4 -h 2 -m 10 -t 1 -s 1 -d 1  # for 2 hop
     $ ../src/tools/view_packing -gf com-friendster.ungraph.txt.bin -pf com-friendster.ungraph.txt.bin.kmeans.1x4 -h 3 -m 10 -t 1 -s 1 -d 1  # for 3 hop
 
